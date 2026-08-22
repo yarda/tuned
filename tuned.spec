@@ -134,6 +134,12 @@ Recommends: subscription-manager
 Requires: python3-syspurpose
 %endif
 %endif
+# On image mode (bootc) systems, rpm-ostree is needed by the bootloader
+# plugin for kernel argument management when bootc's native
+# set-options-for-source is not yet available
+%if 0%{?fedora} || 0%{?rhel} >= 9
+Requires: (rpm-ostree if bootc)
+%endif
 
 %description
 The tuned package contains a daemon that tunes system settings dynamically.
